@@ -14,27 +14,28 @@ The goal of the project is to learn how to control multiple motors using a singl
 Project Benefits:
 
 The project benefits me by showing me how to control multiple motors using the L293D chip instead of needing many parts. It also shows me how to program the Arduino to give precise commands to each motor. The same idea can be expanded and used in many applications, such as:
-• Robotics
-• Smart cars
-• Robotic arms
+- Robotics
+- Smart cars
+-  Robotic arms
 
 Tools used:
-4xDC motors
-2xL293D
-Breadboard
-Arduino uno
-9v battery
-Wires
+- 4xDC motors
+- 2xL293D
+- Breadboard
+- Arduino uno
+- 9v battery
+- Wires
 
 Project implementation:
 
 First, I connected the four DC motors to the L293D chip. Each motor has two control pins (IN1 and IN2, for example) and an enable pin (EN) so I can control them via the Arduino.
 
 Using the code, I program each motor to:
-• Move forward or backward based on the signals I send from the Arduino.
-• Each motor can be set to start at a specific time, stop, or move in reverse.
+-  Move forward or backward based on the signals I send from the Arduino.
+-  Each motor can be set to start at a specific time, stop, or move in reverse.
 
 The L293D chip connects the Arduino to the motors, helping them deliver power to the motors and receive and execute commands from the Arduino. This way, I can control each motor individually or have them all operate together in a specific pattern, such as: forward for a period, then reverse, or even right and left in rotation.
+
 Code:
 
 int m1_in1 = 2;
@@ -80,27 +81,32 @@ void setup() {
   stopAllMotors();
 }
 
-void loop() {
+void loop() 
+{
  
 }
 
-void moveForward() {
+void moveForward() 
+{
   motorForward(m1_in1, m1_in2);
   motorForward(m2_in1, m2_in2);
   motorForward(m3_in1, m3_in2);
   motorForward(m4_in1, m4_in2);
 }
 
-void moveBackward() {
+void moveBackward() 
+{
   motorBackward(m1_in1, m1_in2);
   motorBackward(m2_in1, m2_in2);
   motorBackward(m3_in1, m3_in2);
   motorBackward(m4_in1, m4_in2);
 }
 
-void alternateRightLeft(long durationMs) {
+void alternateRightLeft(long durationMs) 
+{
   long start = millis();
-  while (millis() - start < durationMs) {
+  while (millis() - start < durationMs)
+  {
     moveRight();
     delay(1000);
     moveLeft();
@@ -108,21 +114,24 @@ void alternateRightLeft(long durationMs) {
   }
 }
 
-void moveRight() {
+void moveRight() 
+{
   motorForward(m1_in1, m1_in2);
   motorForward(m3_in1, m3_in2);
   motorStop(m2_in1, m2_in2);
   motorStop(m4_in1, m4_in2);
 }
 
-void moveLeft() {
+void moveLeft()
+{
   motorForward(m2_in1, m2_in2);
   motorForward(m4_in1, m4_in2);
   motorStop(m1_in1, m1_in2);
   motorStop(m3_in1, m3_in2);
 }
 
-void stopAllMotors() {
+void stopAllMotors() 
+{
   motorStop(m1_in1, m1_in2);
   motorStop(m2_in1, m2_in2);
   motorStop(m3_in1, m3_in2);
@@ -131,17 +140,20 @@ void stopAllMotors() {
 
 
 
-void motorForward(int in1, int in2) {
+void motorForward(int in1, int in2)
+{
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
 }
 
-void motorBackward(int in1, int in2) {
+void motorBackward(int in1, int in2) 
+{
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
 }
 
-void motorStop(int in1, int in2) {
+void motorStop(int in1, int in2) 
+{
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
 }
